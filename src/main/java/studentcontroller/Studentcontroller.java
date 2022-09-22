@@ -1,6 +1,8 @@
 package studentcontroller;
 
 import java.io.IOException;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +44,6 @@ public class Studentcontroller extends HttpServlet {
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("Register")){
 			modelstudentreg s = new modelstudentreg();
-			s.setId(Integer.parseInt("ID"));
 		    s.setfname(request.getParameter("fname"));
 		    s.setlname(request.getParameter("lname"));
 		    s.setemail(request.getParameter("email"));
@@ -70,6 +71,36 @@ public class Studentcontroller extends HttpServlet {
 			}
 			
 			
+		}
+		else if(action.equalsIgnoreCase("update"))
+		{
+			modelstudentreg s = new modelstudentreg();
+			s.setfname(request.getParameter("fname"));
+			s.setlname(request.getParameter("lname"));
+			s.setemail(request.getParameter("email"));
+			s.setphone(Long.parseLong(request.getParameter("phone")));
+			s.setgender(request.getParameter("gender"));
+			s.setId(Integer.parseInt(request.getParameter("id")));
+			
+			studentdao.updateseller(s);
+			 HttpSession session = request.getSession();
+		 		session.setAttribute("data", s);
+		 		request.getRequestDispatcher("studentprofile.jsp").forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("delete"))
+		{
+			modelstudentreg s = new modelstudentreg();
+			s.setfname(request.getParameter("fname"));
+			s.setlname(request.getParameter("lname"));
+			s.setemail(request.getParameter("email"));
+			s.setphone(Long.parseLong(request.getParameter("phone")));
+			s.setgender(request.getParameter("gender"));
+		
+			
+			studentdao.deleteseller(s);
+			 HttpSession session = request.getSession();
+		 		session.setAttribute("data ", s);
+		 		request.getRequestDispatcher("studentprofile.jsp").forward(request, response);
 		}
 		
 	}

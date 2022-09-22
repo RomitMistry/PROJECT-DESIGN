@@ -1,3 +1,4 @@
+<%@page import="model.modelstudentreg"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!--
@@ -21,6 +22,14 @@ Author URL: http://w3layouts.com
     <link rel="stylesheet" href="assets/css/style-starter.css">
   </head>
   <body>
+   <%modelstudentreg s = null;
+if(session.getAttribute("data")!=null){
+	s = (modelstudentreg)session.getAttribute("data");
+}
+else{
+	response.sendRedirect("sellerlog.jsp");
+}
+%> 
 <!-- header -->
 <header class="w3l-header">
 	<div class="hero-header-11">

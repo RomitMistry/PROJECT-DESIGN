@@ -1,3 +1,4 @@
+<%@page import="model.modelstudentreg"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!--
@@ -21,6 +22,14 @@ Author URL: http://w3layouts.com
     <link rel="stylesheet" href="assets/css/style-starter.css">
   </head>
   <body>
+  <%modelstudentreg s = null;
+if(session.getAttribute("data")!=null){
+	s = (modelstudentreg)session.getAttribute("data");
+}
+else{
+	response.sendRedirect("sellerlog.jsp");
+}
+%> 
 <!-- header -->
 <header class="w3l-header">
 	<div class="hero-header-11">
@@ -75,16 +84,21 @@ Author URL: http://w3layouts.com
 			</div>
 			<form action="Studentcontroller" method="post">
 				<div class="main-input">
-					<input type="text" name="fname" placeholder="First name" class="contact-input" required="" />
-					<input type="text" name="lname" placeholder="Last name" class="contact-input" required="" />
-					<input type="email" name="email" placeholder="Enter your email" class="contact-input" required="" />
-					<input type="text" name="phone" placeholder="Enter your Mobile Number" class="contact-input" required="" />
-					<input type="text" name="gender" placeholder="Male or Female" class="contact-input" required="" />
+					<input type="hidden" name="id" value="<%= s.getid() %>" class="contact-input" required="" />
+					<input type="text" name="fname" placeholder="First name" value="<%= s.getfname() %>" class="contact-input" required="" />
+					<input type="text" name="lname" placeholder="Last name"  value="<%= s.getlname() %>" class="contact-input" required="" />
+					<input type="email" name="email" placeholder="Enter your email"  value="<%= s.getemail()  %>"  class="contact-input" required="" />
+					<input type="text" name="phone" placeholder="Enter your Mobile Number" value="<%= s.getphone() %>"class="contact-input" required="" />
+					<input type="text" name="gender" placeholder="Male or Female"  value="<%= s.getgender() %>" class="contact-input" required="" />
 				</div>
-				<div class="text-right">
+				
+				<div class="text-center">
 			      	 <input type="submit" value="update" name ="action" >
 					<!-- <button class="btn-secondary btn theme-button"> value="Register" name ="action" Register</button> -->
 				</div>
+				<div class="text-right">
+			      	 <input type="submit" value="delete" name ="action" >
+			      	</div> 
 			</form>
 		</div>
 	</div>
